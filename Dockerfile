@@ -6,13 +6,14 @@ LABEL org.opencontainers.image.title="python-runtime-ramp" \
       io.pyramp.numpy="2.3.5" \
       io.pyramp.cython="3.1.2"
 ENV OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 \
-    PYTHONUNBUFFERED=1 PYTHONDONTWRITEBYTECODE=1
+    PYTHONUNBUFFERED=1 PYTHONDONTWRITEBYTECODE=1 \
+    PIP_DISABLE_PIP_VERSION_CHECK=1
 WORKDIR /app
 COPY . .
 # Optional combined trust bundle for managed proxy environments; never persisted.
 RUN --mount=type=secret,id=proxy_ca \
     if [ -f /run/secrets/proxy_ca ]; then export PIP_CERT=/run/secrets/proxy_ca; fi; \
-    python -m pip install --no-cache-dir pip==25.2 setuptools==80.9.0 wheel==0.45.1 Cython==3.1.2 && \
+    python -m pip install --no-cache-dir pip==25.3 setuptools==80.9.0 wheel==0.45.1 Cython==3.1.2 && \
     python -m pip install --no-cache-dir --no-build-isolation '.[test]' && \
     python -m pytest -q && \
     mkdir -p /usr/local/share/pyramp && \

@@ -148,7 +148,9 @@ Local development:
 ## Reproducibility and confounders
 
 Image: CPython 3.12.12 on bookworm; NumPy 2.3.5; Cython 3.1.2;
-setuptools 80.9.0; wheel 0.45.1; pip 25.2; pytest 8.4.2.
+setuptools 80.9.0; wheel 0.45.1; pip 25.3; pytest 8.4.2.
+The image disables pip update notices because its pip version is deliberately
+pinned; this does not suppress installation errors.
 Build metadata in /usr/local/share/pyramp records exact installed Python packages,
 Python/compiler versions and NumPy build configuration. The base tag and OS
 packages are not digest-locked: this is a pinned application recipe, not a
