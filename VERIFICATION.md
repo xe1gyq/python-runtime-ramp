@@ -85,4 +85,15 @@ The Cython-native Docker command is documented, not claimed to have succeeded.
     PYTHONPATH=src python -m pyramp.cli --benchmark dot --impl numpy-dot --n 1024 --iterations 10 --warmup 2 --seed 42 --dtype float64
 
 All three completed successfully (silent, status 0).
-ROI is currently no-op in src/pyramp/roi.py.
+Those runs used the original no-op marker adapter.
+The current adapter in src/pyramp/roi.py prints flushed text markers.
+
+## Text marker verification
+
+After enabling local text markers, small CLI runs for cpython-list,
+cpython-annotated-list and numpy-dot each produced exactly:
+
+    ROI Begin
+    ROI End
+
+Dry-run output did not contain either marker line.

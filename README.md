@@ -90,14 +90,17 @@ Python result objects and arithmetic allocations intrinsic to an implementation
 are intentional workload mechanisms. Results remain assigned to a live local.
 
 All ROI marker code lives in **src/pyramp/roi.py**, exposing only begin()/end().
-It is currently a **local no-op**. No external marker adapter is configured.
+It currently emits **local text markers**, `ROI Begin` and `ROI End`,
+with immediate stdout flushing. No external marker adapter is configured.
 These two bodies are the only future integration point; use only verified
 APIs supplied by the chosen execution environment. The dry-run plan
 contains textual marker labels but never calls the marker functions.
 
 No production execution timing, hardware counters, CPU inspection, correctness
-checks, reference calculation, JSON serialization, or printing occurs in ROI.
-Successful real runs are silent and return exit status 0.
+checks, reference calculation, JSON serialization, or printing occurs in the
+repeated workload section. The marker functions print at the boundaries; their
+I/O adds boundary overhead and is not a hardware measurement hook.
+Successful real runs print `ROI Begin` followed by `ROI End` and return exit status 0.
 
 ## Build and run
 

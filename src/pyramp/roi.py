@@ -1,12 +1,12 @@
 """Only ROI integration point.
 
-Local no-op adapter. No external ROI API is configured.
-Replace these two bodies only when the actual integration API is verified.
+Local text markers; no external ROI API is configured.
+Marker output is flushed immediately. It is not a hardware measurement hook.
 """
 
 def begin() -> None:
-    pass
+    print("ROI Begin", flush=True)
 
 
 def end() -> None:
-    pass
+    print("ROI End", flush=True)
