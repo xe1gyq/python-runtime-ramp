@@ -1,0 +1,23 @@
+[build-system]
+requires = ["setuptools==80.9.0", "wheel==0.45.1", "Cython==3.1.2"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "python-runtime-ramp"
+version = "0.1.0"
+description = "Parameterized Python execution mechanism workload for external observation"
+requires-python = ">=3.12"
+authors = [{name = "xe1gyq"}]
+dependencies = ["numpy==2.3.5"]
+
+[project.optional-dependencies]
+test = ["pytest==8.4.2"]
+
+[project.scripts]
+pyramp = "pyramp.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
